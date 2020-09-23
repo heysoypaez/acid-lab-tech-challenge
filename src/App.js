@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Home from "./pages/Home.js"
+
+import { AlbumDetails , AlbumEdit , AlbumNew , Albums } from "./pages/albums"
+import { PhotoDetails , PhotoEdit , PhotoNew , Photos } from "./pages/photos"
+
+import NotFound from "./pages/NotFound.js"
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+
+import Layout from "./layout/Layout.js"
+
+function App(props) {
+ 
+    return (
+      <BrowserRouter>
+        <Layout>
+        <Switch>
+
+          <Route exact path="/" component={Home} />
+          
+          <Route exact path="/albums" component={Albums} />
+          <Route exact path="/albums/:albumId" component={AlbumDetails} />
+          <Route exact path="/albums/new" component={AlbumNew} />
+          <Route exact path="/albums/:albumId/edit" component={AlbumEdit} />
+          
+          <Route exact path="/photos" component={Photos} />
+          <Route exact path="/photos/:photoId" component={PhotoDetails} />
+          <Route exact path="/photos/new" component={PhotoNew} />
+          <Route exact path="/photos/:photoId/edit" component={PhotoEdit} />
+
+          <Route component={NotFound} />
+
+        </Switch>
+        </Layout>
+      </BrowserRouter>
+    );
+  
 }
 
-export default App;
+export default  App;
