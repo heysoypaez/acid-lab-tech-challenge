@@ -10,9 +10,7 @@ class PhotosContainer extends Component {
 
   fetchPhotos = async () => {
     try {
-      const photos = await graphql({
-        url: "https://graphqlzero.almansi.me/api",
-        query: `
+    	const GET_PHOTOS = `
 						query (
 						  $options: PageQueryOptions
 						) {
@@ -30,8 +28,27 @@ class PhotosContainer extends Component {
 						    }
 						  }
 						}
-					`,
+					`
+			const CREATE_PHOTO = `
+				mutation (
+				  $input: CreatePhotoInput!
+				) {
+				  createPhoto(input: $input) {
+				    title
+				    url
+				    thumbnailUrl
+				  }
+				}
+			`
+      const photos = await graphql({
+        url: "https://graphqlzero.almansi.me/api",
+        query: GET_PHOTOS,
         id: 1,
+			  input: {
+			    title: "A good Photo made in chile",
+			    url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/32/30/3c/chile.jpg",
+			    thumbnailUrl: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/32/30/3c/chile.jpg"
+			  },
         options: {
           paginate: {
             page: 1,

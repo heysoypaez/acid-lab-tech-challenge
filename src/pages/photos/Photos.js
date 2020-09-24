@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import PhotosContainer from "../../components/photos/PhotosContainer.js"
+
 
  class Photos extends Component {
 
@@ -12,7 +14,9 @@ import React, { Component, Fragment } from 'react';
 
 	render() {
 		return (
-			<Fragment>Hello Photos </Fragment>
+			<Fragment>
+				<PhotosContainer /> 
+			</Fragment>
 		);
 	}
 }

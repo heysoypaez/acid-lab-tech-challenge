@@ -20,13 +20,13 @@ function App(props) {
           <Route exact path="/" component={Home} />
           
           <Route exact path="/albums" component={Albums} />
-          <Route exact path="/albums/:albumId" component={AlbumDetails} />
           <Route exact path="/albums/new" component={AlbumNew} />
+          <Route exact path="/albums/:albumId" component={AlbumDetails} />
           <Route exact path="/albums/:albumId/edit" component={AlbumEdit} />
           
           <Route exact path="/photos" component={Photos} />
-          <Route exact path="/photos/:photoId" component={PhotoDetails} />
           <Route exact path="/photos/new" component={PhotoNew} />
+          <Route exact path="/photos/:photoId" component={PhotoDetails} />
           <Route exact path="/photos/:photoId/edit" component={PhotoEdit} />
 
           <Route component={NotFound} />
