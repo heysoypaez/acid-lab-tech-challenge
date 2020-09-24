@@ -1,59 +1,85 @@
 import React, { Component, Fragment } from "react";
+import { graphql } from "@octokit/graphql";
 
 class PhotosContainer extends Component {
-	state = {
-		photos: [],
-	};
+  state = {
+    photos: [],
+    loading: true,
+  };
 
-	componentDidMount = (props) => {
-		console.log("epale");
-		fetch("https://graphqlzero.almansi.me/api", {
-			method: "POST",
-			headers: { "content-type": "application/json" },
-			body: JSON.stringify({
-				query: `{
-		      photo(id: 1) {
-		        id
-		        url
-		        title
-		        album {
-		        	title
-		        }
-		      }
-		    }`,
-			}),
-		})
-			.then((res) => res.json())
-			.then((photos) => {
-				this.setState({
-					photos: [...this.state.photos, photos.data.photo],
-				});
-			});
-	};
+  fetchPhotos = async () => {
+    try {
+      const photos = await graphql({
+        url: "https://graphqlzero.almansi.me/api",
+        query: `
+						query (
+						  $options: PageQueryOptions
+						) {
+						  photos(options: $options) {
+						    data {
+						      id
+						      title
+						      url
+						      album {
+						      	title
+						      }
+						    }
+						    meta {
+						      totalCount
+						    }
+						  }
+						}
+					`,
+        id: 1,
+        options: {
+          paginate: {
+            page: 1,
+            limit: 20,
+          },
+        },
+      });
+      console.log(photos);
+      this.setState({
+        photos: photos.photos.data,
+        loading: false,
+        error: null,
+      });
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        error: error,
+        loading: true,
+      });
+    }
+  };
 
-	render() {
-		console.log(this.state);
-		if (this.state.photos.length > 0) {
-			return (
-				<section>
-					{this.state.photos.map((photo) => (
-						<figure key={photo.id}>
-							<img
-								src={photo.url}
-								width="300"
-								alt={photo.title}
-								title={photo.title}
-							/>
-							<figcaption>
-								{photo.title} | Album: {photo.album.title}
-							</figcaption>
-						</figure>
-					))}
-				</section>
-			);
-		}
-		return <Fragment>Hello PhotosContainer </Fragment>;
-	}
+  componentDidMount = (props) => {
+    this.fetchPhotos();
+  };
+
+  render() {
+    console.log(this.state);
+    if (this.state.photos.length > 0 && !this.state.loading) {
+      return (
+        <section>
+          {this.state.photos.map((photo) => (
+            <figure key={photo.id}>
+              <img
+                src={photo.url}
+                width="300"
+                alt={photo.title}
+                title={photo.title}
+              />
+              <figcaption>
+                {photo.title} | Album: {photo.album.title}
+              </figcaption>
+            </figure>
+          ))}
+        </section>
+      );
+    }
+    return <Fragment>Hello PhotosContainer </Fragment>;
+  }
 }
 
 export default PhotosContainer;
