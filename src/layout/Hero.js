@@ -6,7 +6,7 @@ function Hero(props) {
 	
 	return(
 		<section className="Hero">
-			Hero Testing
+			<h1>{props.title}</h1>
 		</section>
 	)
 }

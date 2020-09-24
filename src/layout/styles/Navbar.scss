@@ -1,0 +1,19 @@
+.Navbar ul {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.Navbar li {
+	list-style-type: none;
+	padding: 0 5%;
+}
+
+.Navbar a {
+	color: white;
+	text-decoration: none
+}
+
+.Navbar a:hover {
+	color: white;
+	text-decoration: underline;
+}
