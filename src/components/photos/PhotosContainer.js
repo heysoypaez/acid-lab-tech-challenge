@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { graphql } from "@octokit/graphql";
+import Photos from "./Photos.js";
 
 class PhotosContainer extends Component {
   state = {
@@ -58,25 +59,11 @@ class PhotosContainer extends Component {
   };
 
   render() {
-    console.log(this.state);
+    if (this.state.loading) {
+      return <Fragment>Loading... </Fragment>;
+    }
     if (this.state.photos.length > 0 && !this.state.loading) {
-      return (
-        <section>
-          {this.state.photos.map((photo) => (
-            <figure key={photo.id}>
-              <img
-                src={photo.url}
-                width="300"
-                alt={photo.title}
-                title={photo.title}
-              />
-              <figcaption>
-                {photo.title} | Album: {photo.album.title}
-              </figcaption>
-            </figure>
-          ))}
-        </section>
-      );
+      return <Photos photos={this.state.photos} />;
     }
     return <Fragment>Hello PhotosContainer </Fragment>;
   }
