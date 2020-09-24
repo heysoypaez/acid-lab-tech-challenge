@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { graphql } from "@octokit/graphql";
 import Photos from "./Photos.js";
+import Loader from "../../layout/Loader.js";
 
 class PhotosContainer extends Component {
   state = {
@@ -10,7 +11,7 @@ class PhotosContainer extends Component {
 
   fetchPhotos = async () => {
     try {
-    	const GET_PHOTOS = `
+      const GET_PHOTOS = `
 						query (
 						  $options: PageQueryOptions
 						) {
@@ -28,27 +29,10 @@ class PhotosContainer extends Component {
 						    }
 						  }
 						}
-					`
-			const CREATE_PHOTO = `
-				mutation (
-				  $input: CreatePhotoInput!
-				) {
-				  createPhoto(input: $input) {
-				    title
-				    url
-				    thumbnailUrl
-				  }
-				}
-			`
-      const photos = await graphql({
+					`;
+      const { photos } = await graphql({
         url: "https://graphqlzero.almansi.me/api",
         query: GET_PHOTOS,
-        id: 1,
-			  input: {
-			    title: "A good Photo made in chile",
-			    url: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/32/30/3c/chile.jpg",
-			    thumbnailUrl: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/32/30/3c/chile.jpg"
-			  },
         options: {
           paginate: {
             page: 1,
@@ -58,7 +42,7 @@ class PhotosContainer extends Component {
       });
       console.log(photos);
       this.setState({
-        photos: photos.photos.data,
+        photos: photos.data,
         loading: false,
         error: null,
       });
@@ -66,7 +50,7 @@ class PhotosContainer extends Component {
       console.log(error);
       this.setState({
         error: error,
-        loading: true,
+        loading: false,
       });
     }
   };
@@ -77,7 +61,11 @@ class PhotosContainer extends Component {
 
   render() {
     if (this.state.loading) {
-      return <Fragment>Loading... </Fragment>;
+      return (
+        <Fragment>
+          <Loader />{" "}
+        </Fragment>
+      );
     }
     if (this.state.photos.length > 0 && !this.state.loading) {
       return <Photos photos={this.state.photos} />;
