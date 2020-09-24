@@ -1,20 +1,22 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
+import Hero from "../../layout/Hero.js";
+import NewPhotoContainer from "../../components/photos/NewPhotoContainer.js";
 
- class PhotoNew extends Component {
+class PhotoNew extends Component {
+  constructor(props) {
+    super(props);
 
- 	constructor(props) {
- 		super(props)
+    this.state = {};
+  }
 
- 		this.state = {
-
- 		}
- 	}
-
-	render() {
-		return (
-			<Fragment>Hello PhotoNew </Fragment>
-		);
-	}
+  render() {
+    return (
+      <Fragment>
+        <Hero title="Create a New Photo in matter of seconds" />
+        <NewPhotoContainer />
+      </Fragment>
+    );
+  }
 }
 
 export default PhotoNew;

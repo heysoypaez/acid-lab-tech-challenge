@@ -1,20 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
 
- class PhotoDetails extends Component {
+class PhotoDetails extends Component {
+  constructor(props) {
+    super(props);
 
- 	constructor(props) {
- 		super(props)
+    this.state = {};
+  }
 
- 		this.state = {
-
- 		}
- 	}
-
-	render() {
-		return (
-			<Fragment>Hello PhotoDetails </Fragment>
-		);
-	}
+  render() {
+    return <Fragment>Hello PhotoDetails </Fragment>;
+  }
 }
 
 export default PhotoDetails;

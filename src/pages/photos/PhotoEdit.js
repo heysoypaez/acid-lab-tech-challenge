@@ -1,20 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
 
- class PhotoEdit extends Component {
+class PhotoEdit extends Component {
+  constructor(props) {
+    super(props);
 
- 	constructor(props) {
- 		super(props)
+    this.state = {};
+  }
 
- 		this.state = {
-
- 		}
- 	}
-
-	render() {
-		return (
-			<Fragment>Hello PhotoEdit </Fragment>
-		);
-	}
+  render() {
+    return <Fragment>Hello PhotoEdit </Fragment>;
+  }
 }
 
 export default PhotoEdit;

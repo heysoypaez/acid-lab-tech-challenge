@@ -1,20 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
 
- class AlbumNew extends Component {
+class AlbumNew extends Component {
+  constructor(props) {
+    super(props);
 
- 	constructor(props) {
- 		super(props)
+    this.state = {};
+  }
 
- 		this.state = {
-
- 		}
- 	}
-
-	render() {
-		return (
-			<Fragment>Hello AlbumNew </Fragment>
-		);
-	}
+  render() {
+    return <Fragment>Hello AlbumNew </Fragment>;
+  }
 }
 
 export default AlbumNew;
