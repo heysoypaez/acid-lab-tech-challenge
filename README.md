@@ -2,9 +2,27 @@
 
 ## What is this Application About ?
 
+A CRUD Application which query its data from [https://graphqlzero.almansi.me/api](https://graphqlzero.almansi.me/api)
 
-## Technologies involved.
+## Note: Particular component
 
+In the `./src/pages/photos/PhotoDetails.js` path you will find a component based in React Hooks.
+
+## Source File Structure
+
+.
+├── components
+│   ├── albums
+│   │   └── styles
+│   └── photos
+│       └── styles
+├── helpers
+├── layout
+│   └── styles
+├── pages
+│   ├── albums
+│   └── photos
+└── styles
 
 
 ## Steps to install and run this project locally.
@@ -43,8 +61,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npm run format`
 
+To format all the `.js` code in the `src` folder using `prettier`.
 
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
