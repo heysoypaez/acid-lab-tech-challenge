@@ -13,10 +13,12 @@ function Navbar(props) {
           <Link to="/photos">Photos</Link>
         </li>
         <li>
-          <Link to="">Albums</Link>
+          <Link to="/albums">Albums</Link>
         </li>
         <li>
-          <Link to="/photos/new">Create</Link>
+          <Link to="/photos/new" className="cta">
+            Create
+          </Link>
         </li>
       </ul>
     </nav>
