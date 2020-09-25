@@ -27,6 +27,7 @@ const GET_PHOTOS = `
 			      id
 			      title
 			      url
+			      thumbnailUrl
 			    }
 			    meta {
 			      totalCount
@@ -35,7 +36,20 @@ const GET_PHOTOS = `
 			}
 		`;
 
-const UPDATE_PHOTOS = `
+const GET_PHOTO = `
+		query (
+		  $id: ID!
+		) 	{
+    photo(id: $id) {
+      id
+      title
+      url
+      thumbnailUrl
+    }
+  }
+`;
+
+const UPDATE_PHOTO = `
 		mutation (
 		  $id: ID!,
 		  $input: UpdatePhotoInput!
@@ -48,4 +62,4 @@ const UPDATE_PHOTOS = `
 		}
 		`;
 
-export { DELETE_PHOTO, CREATE_PHOTO, GET_PHOTOS, UPDATE_PHOTOS };
+export { DELETE_PHOTO, CREATE_PHOTO, GET_PHOTOS, UPDATE_PHOTO, GET_PHOTO };
