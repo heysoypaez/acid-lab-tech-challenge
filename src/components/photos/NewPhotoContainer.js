@@ -2,7 +2,9 @@ import React, { Component, Fragment } from "react";
 import { graphql } from "@octokit/graphql";
 import NewPhotoForm from "./NewPhotoForm.js";
 import Loader from "../../layout/Loader.js";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import Photo from "./Photo.js";
+import { CREATE_PHOTO } from "../../helpers/graphqlQueries.js";
 
 class NewPhotoContainer extends Component {
   state = {
@@ -28,30 +30,16 @@ class NewPhotoContainer extends Component {
 
   createPhoto = async () => {
     try {
-      const CREATE_PHOTO = `
-				mutation (
-				  $input: CreatePhotoInput!
-				) {
-				  createPhoto(input: $input) {
-				    title
-				    url
-				    thumbnailUrl
-				  }
-				}
-			`;
-
-      console.log(this.state.form);
-
       const { createPhoto } = await graphql({
         url: "https://graphqlzero.almansi.me/api",
         query: CREATE_PHOTO,
         input: {
           title: this.state.form.title,
-          url: this.state.form.imgUrl,
+          url: this.state.form.url,
           thumbnailUrl: this.state.form.thumbnailUrl,
         },
       });
-      console.log(createPhoto);
+
       this.setState({
         photoSent: createPhoto,
         loading: false,
@@ -81,12 +69,7 @@ class NewPhotoContainer extends Component {
       return (
         <Fragment>
           <h2>Photo created Succesfully!</h2>
-          <img
-            src={this.state.form.imgUrl}
-            title={this.state.form.title}
-            alt={this.state.form.title}
-            width={300}
-          />
+          <Photo photo={this.state.form} />
           <Link to="/photos">See all the photos</Link>
         </Fragment>
       );

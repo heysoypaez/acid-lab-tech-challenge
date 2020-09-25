@@ -12,7 +12,7 @@ function NewPhotoForm(props) {
       />
       <input
         type="url"
-        name="imgUrl"
+        name="url"
         placeholder="Image url"
         onChange={props.onChange}
       />
@@ -20,12 +20,6 @@ function NewPhotoForm(props) {
         type="url"
         name="thumbnailUrl"
         placeholder="thumbnail url"
-        onChange={props.onChange}
-      />
-      <input
-        type="text"
-        name="album"
-        placeholder="Album"
         onChange={props.onChange}
       />
       <input type="submit" value="Create New Photo" />
