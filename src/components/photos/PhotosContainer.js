@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { graphql } from "@octokit/graphql";
 import Photos from "./Photos.js";
 import Loader from "../../layout/Loader.js";
+import { GET_PHOTOS } from "../../helpers/graphqlQueries.js";
 
 class PhotosContainer extends Component {
   state = {
@@ -11,29 +12,15 @@ class PhotosContainer extends Component {
 
   fetchPhotos = async () => {
     try {
-      const GET_PHOTOS = `
-						query (
-						  $options: PageQueryOptions
-						) {
-						  photos(options: $options) {
-						    data {
-						      id
-						      title
-						      url
-						      album {
-						      	title
-						      }
-						    }
-						    meta {
-						      totalCount
-						    }
-						  }
-						}
-					`;
       const { photos } = await graphql({
         url: "https://graphqlzero.almansi.me/api",
         query: GET_PHOTOS,
         options: {
+          sort: {
+            order: "DESC",
+            field: "id",
+          },
+
           paginate: {
             page: 1,
             limit: 20,
