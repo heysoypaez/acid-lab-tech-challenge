@@ -1,20 +1,28 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import PhotosContainer from "../../components/photos/PhotosContainer.js";
+import Seo from "../../layout/Seo.js";
 
-class Photos extends Component {
-  constructor(props) {
-    super(props);
+const Photos = ({ page }) => {
+  const { title, metaDescription } = page;
 
-    this.state = {};
-  }
+  return (
+    <Fragment>
+      <Seo
+        site={{
+          title: title,
+          metaDescription: metaDescription,
+        }}
+      />
+      <PhotosContainer />
+    </Fragment>
+  );
+};
 
-  render() {
-    return (
-      <Fragment>
-        <PhotosContainer />
-      </Fragment>
-    );
-  }
-}
+Photos.defaultProps = {
+  page: {
+    title: "All your photos in one place",
+    metaDescription: "All your photos in one place",
+  },
+};
 
 export default Photos;
