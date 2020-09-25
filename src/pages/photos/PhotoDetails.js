@@ -1,8 +1,13 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Photo from "../../components/photos/Photo.js";
+import EditPhotoForm from "../../components/photos/EditPhotoForm.js";
 import Loader from "../../layout/Loader.js";
 import { graphql } from "@octokit/graphql";
-import { DELETE_PHOTO } from "../../helpers/graphqlQueries.js";
+import {
+  DELETE_PHOTO,
+  UPDATE_PHOTO,
+  GET_PHOTO,
+} from "../../helpers/graphqlQueries.js";
 
 const PhotoDetails = (props) => {
   const [photoId, setPhotoId] = useState(0);
@@ -11,18 +16,54 @@ const PhotoDetails = (props) => {
   const [photo, setPhoto] = useState({});
   const [showEdit, setShowEdit] = useState(false);
   const [photoDeleted, setPhotoDeleted] = useState(false);
+  const [editFormValues, setEditFormValues] = useState({});
+  const [photoEdited, setPhotoEdited] = useState(false);
 
-  const handleDeleteClick = async () => {
+  const deletePhoto = async () => {
     try {
+      setLoading(true);
       const { deletePhoto } = await graphql({
         url: "https://graphqlzero.almansi.me/api",
         query: DELETE_PHOTO,
         id: photoId,
       });
       setPhotoDeleted(deletePhoto);
-      console.log(deletePhoto);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setError(error);
+    }
+  };
+
+  const handleDeleteClick = () => {
+    deletePhoto();
+  };
+
+  const handleEditChange = (event) => {
+    setEditFormValues({
+      ...editFormValues,
+      [event.target.name]: event.target.value,
+    });
+    console.log(editFormValues);
+  };
+
+  const editPhoto = async (photoId) => {
+    try {
+      const { updatePhoto } = await graphql({
+        url: "https://graphqlzero.almansi.me/api",
+        query: UPDATE_PHOTO,
+        id: photoId,
+        input: {
+          title: editFormValues.title,
+          thumbnailUrl: editFormValues.thumbnailUrl,
+        },
+      });
+
+      console.log(updatePhoto);
+      setLoading(true);
+      setPhotoEdited(updatePhoto);
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -34,27 +75,23 @@ const PhotoDetails = (props) => {
     }
   };
 
-  const fetchPhoto = (photoId) => {
+  const handleEditSubmit = (event) => {
+    event.preventDefault();
+    editPhoto(photoId);
+    setShowEdit(false);
+  };
+
+  const fetchPhoto = async (photoId) => {
     try {
       setPhotoId(props.match.params.photoId);
-      fetch("https://graphqlzero.almansi.me/api", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          query: `{
-			      photo(id: ${photoId}) {
-			        id
-			        title
-			        url
-			      }
-			    }`,
-        }),
-      })
-        .then((res) => res.json())
-        .then((photo) => {
-          setPhoto(photo);
-          setLoading(false);
-        });
+      const { photo } = await graphql({
+        url: "https://graphqlzero.almansi.me/api",
+        query: GET_PHOTO,
+        id: photoId,
+      });
+
+      setPhoto(photo);
+      setLoading(false);
     } catch (error) {
       setError(error);
       console.log(error);
@@ -62,11 +99,33 @@ const PhotoDetails = (props) => {
   };
 
   useEffect(() => {
-    fetchPhoto(photoId);
+    if (loading) {
+      fetchPhoto(photoId);
+    }
   });
 
   if (loading) {
     return <Loader />;
+  }
+
+  if (photoEdited) {
+    return (
+      <Fragment>
+        <Photo photo={photoEdited} />
+        <button className="cta" onClick={handleDeleteClick}>
+          Delete
+        </button>
+        <button className="cta cta-secondary" onClick={handleEditClick}>
+          Edit
+        </button>
+        {showEdit && (
+          <EditPhotoForm
+            onSubmit={handleEditSubmit}
+            onChange={handleEditChange}
+          />
+        )}
+      </Fragment>
+    );
   }
 
   if (error) {
@@ -79,14 +138,19 @@ const PhotoDetails = (props) => {
 
   return (
     <Fragment>
-      <Photo photo={photo.data.photo} />
+      <Photo photo={photo} />
       <button className="cta" onClick={handleDeleteClick}>
         Delete
       </button>
       <button className="cta cta-secondary" onClick={handleEditClick}>
         Edit
       </button>
-      {showEdit && <h3>I am editing</h3>}
+      {showEdit && (
+        <EditPhotoForm
+          onSubmit={handleEditSubmit}
+          onChange={handleEditChange}
+        />
+      )}
     </Fragment>
   );
 };
