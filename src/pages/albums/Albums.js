@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import Hero from "../../layout/Hero.js";
 
 class Albums extends Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class Albums extends Component {
   }
 
   render() {
-    return <Fragment>Hello Albums </Fragment>;
+    return <Hero title="Next soon in the following technical challenge" />;
   }
 }
 

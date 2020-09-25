@@ -12,7 +12,7 @@ class PhotoNew extends Component {
   render() {
     return (
       <Fragment>
-        <Hero title="Create a New Photo in matter of seconds" />
+        <Hero title="Create a new photo in a matter of seconds" />
         <NewPhotoContainer />
       </Fragment>
     );
