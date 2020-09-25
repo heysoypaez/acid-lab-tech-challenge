@@ -1,3 +1,5 @@
+@import "./styles/variables.scss"; 
+
 /* Reset
 ------------*/
 
@@ -18,4 +20,19 @@ span,
 ul,
 li {
 	font-family: arial, sans-serif;
+}
+
+
+.cta {
+	background: $ctaColorPrimary;
+	border-radius: $borderDefault;
+	padding: 10px 20px;
+	color: white;
+	border: 0;
+	cursor: pointer;
+	min-width: 100px;
+}
+
+.cta-secondary {
+	background: $ctaColorSecondary;
 }
