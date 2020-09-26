@@ -46,5 +46,5 @@
     "jest-enzyme": "^7.1.2",
     "react-test-renderer": "^16.13.1"
   },
-  "homepage": "http://heysoypaez.github.io/acid-challenge"
+  "homepage": "http://heysoypaez.github.io/acid-lab-tech-challenge"
 }
