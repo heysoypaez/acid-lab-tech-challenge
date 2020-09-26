@@ -75,7 +75,7 @@ describe("Test state and props in method", () => {
         "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
     };
     wrapper.setState({ form: input });
-    expect(wrapper.state("sent")).toBeFalsy;
+    expect(wrapper.state("error")).toBeFalsy;
     await instance.createPhoto(input);
     expect(wrapper.state("error")).toBeTruthy;
   });
