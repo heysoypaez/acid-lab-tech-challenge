@@ -2,18 +2,19 @@ import React, { Component, Fragment } from "react";
 import { graphql } from "@octokit/graphql";
 import Photos from "./Photos.js";
 import Loader from "../../layout/Loader.js";
-import { GET_PHOTOS } from "../../helpers/graphqlQueries.js";
+import { API_URL, GET_PHOTOS } from "../../helpers/graphqlQueries.js";
 
 class PhotosContainer extends Component {
   state = {
     photos: [],
     loading: true,
+    error: null,
   };
 
   fetchPhotos = async () => {
     try {
       const { photos } = await graphql({
-        url: "https://graphqlzero.almansi.me/api",
+        url: API_URL,
         query: GET_PHOTOS,
         options: {
           sort: {
@@ -23,18 +24,16 @@ class PhotosContainer extends Component {
 
           paginate: {
             page: 1,
-            limit: 20,
+            limit: 30,
           },
         },
       });
-      console.log(photos);
       this.setState({
         photos: photos.data,
         loading: false,
         error: null,
       });
     } catch (error) {
-      console.log(error);
       this.setState({
         error: error,
         loading: false,
@@ -48,16 +47,12 @@ class PhotosContainer extends Component {
 
   render() {
     if (this.state.loading) {
-      return (
-        <Fragment>
-          <Loader />{" "}
-        </Fragment>
-      );
+      return <Loader />;
     }
     if (this.state.photos.length > 0 && !this.state.loading) {
       return <Photos photos={this.state.photos} />;
     }
-    return <Fragment>Hello PhotosContainer </Fragment>;
+    return <Fragment>Photos</Fragment>;
   }
 }
 

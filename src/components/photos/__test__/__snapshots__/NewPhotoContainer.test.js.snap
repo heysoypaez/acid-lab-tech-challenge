@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot of component Matches snapshot in default state 1`] = `
+<form
+  className="NewPhotoForm"
+  onSubmit={[Function]}
+>
+  <label
+    htmlFor="title"
+  >
+    Title
+  </label>
+  <input
+    id="title"
+    name="title"
+    onChange={[Function]}
+    placeholder="Title"
+    type="text"
+  />
+  <label
+    htmlFor="url"
+  >
+    Image Url
+  </label>
+  <input
+    id="url"
+    name="url"
+    onChange={[Function]}
+    placeholder="Image url"
+    type="url"
+  />
+  <input
+    name="thumbnailUrl"
+    onChange={[Function]}
+    placeholder="thumbnail url"
+    type="url"
+  />
+  <input
+    type="submit"
+    value="Create New Photo"
+  />
+</form>
+`;

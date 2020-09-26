@@ -4,11 +4,10 @@ import NewPhotoForm from "./NewPhotoForm.js";
 import Loader from "../../layout/Loader.js";
 import { Link } from "react-router-dom";
 import Photo from "./Photo.js";
-import { CREATE_PHOTO } from "../../helpers/graphqlQueries.js";
+import { API_URL, CREATE_PHOTO } from "../../helpers/graphqlQueries.js";
 
 class NewPhotoContainer extends Component {
   state = {
-    photos: [],
     loading: false,
     form: {},
     sent: false,
@@ -25,18 +24,18 @@ class NewPhotoContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.createPhoto();
+    this.createPhoto(this.state.form);
   };
 
-  createPhoto = async () => {
+  createPhoto = async (input) => {
     try {
       const { createPhoto } = await graphql({
-        url: "https://graphqlzero.almansi.me/api",
+        url: API_URL,
         query: CREATE_PHOTO,
         input: {
-          title: this.state.form.title,
-          url: this.state.form.url,
-          thumbnailUrl: this.state.form.thumbnailUrl,
+          title: input.title,
+          url: input.url,
+          thumbnailUrl: input.thumbnailUrl,
         },
       });
 
@@ -46,24 +45,19 @@ class NewPhotoContainer extends Component {
         error: null,
         sent: true,
       });
+      return createPhoto;
     } catch (error) {
-      console.log(error.message);
       this.setState({
         error: error,
         loading: false,
       });
+      return error;
     }
   };
 
-  componentDidMount = (props) => {};
-
   render() {
     if (this.state.loading) {
-      return (
-        <Fragment>
-          <Loader />{" "}
-        </Fragment>
-      );
+      return <Loader />;
     }
     if (this.state.sent) {
       return (
@@ -75,12 +69,10 @@ class NewPhotoContainer extends Component {
       );
     }
     return (
-      <Fragment>
-        <NewPhotoForm
-          onSubmit={this.handleSubmit}
-          onChange={this.handleInputChange}
-        />
-      </Fragment>
+      <NewPhotoForm
+        onSubmit={this.handleSubmit}
+        onChange={this.handleInputChange}
+      />
     );
   }
 }

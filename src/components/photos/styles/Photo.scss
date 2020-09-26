@@ -1,3 +1,23 @@
+@import "../../../styles/variables.scss";
+
+// Internal variable
+$photoWidth: 280px;
+
 .Photo {
-	max-width: 280px;
+	max-width: $photoWidth;
+	border: 1px solid gray;
+	border-radius: $borderRadiusDefault;
+	overflow: hidden;
+}
+
+.Photo:hover {
+	box-shadow: $boxShadowDefault;
+}
+
+.Photo img {
+	width: $photoWidth;
+}
+
+.Photo figcaption {
+	padding: 20px 40px;
 }

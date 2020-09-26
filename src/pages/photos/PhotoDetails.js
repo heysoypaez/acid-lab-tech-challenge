@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import Photo from "../../components/photos/Photo.js";
 import EditPhotoForm from "../../components/photos/EditPhotoForm.js";
 import Loader from "../../layout/Loader.js";
+import Seo from "../../layout/Seo.js";
 import { graphql } from "@octokit/graphql";
 import {
   DELETE_PHOTO,
@@ -138,6 +139,12 @@ const PhotoDetails = (props) => {
 
   return (
     <Fragment>
+      <Seo
+        site={{
+          title: photo.title,
+          metaDescription: photo.title,
+        }}
+      />
       <Photo photo={photo} />
       <button className="cta" onClick={handleDeleteClick}>
         Delete
