@@ -6,14 +6,15 @@ import { AlbumDetails, AlbumEdit, AlbumNew, Albums } from "./pages/albums";
 import { PhotoDetails, PhotoEdit, PhotoNew, Photos } from "./pages/photos";
 
 import NotFound from "./pages/NotFound.js";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
 import Layout from "./layout/Layout.js";
 import "./App.scss";
 
 function App(props) {
   return (
-    <BrowserRouter>
+
+    <HashRouter basename="/">
       <Layout>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -31,7 +32,7 @@ function App(props) {
           <Route component={NotFound} />
         </Switch>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
