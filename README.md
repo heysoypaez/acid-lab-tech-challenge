@@ -1,15 +1,19 @@
 # My Photos App.
 
+<img src="public/portrait.png" width="700" />
+
 ## What is this Application About ?
 
 A CRUD Application which query its data from [https://graphqlzero.almansi.me/api](https://graphqlzero.almansi.me/api)
 
-## Note: Particular component
+## Note: Particular components
 
-In the `./src/pages/photos/PhotoDetails.js` path you will find a component based in React Hooks.
+- In the `./src/pages/photos/PhotoDetails.js` path you will find a component based in React Hooks.
+- In the `./src/components/photos/__test__/NewPhotoContainer.test.js` path you will find a unit test for the NewPhotoContainer.js component.
 
 ## Source File Structure
 
+``` 
 .
 ├── components
 │   ├── albums
@@ -23,7 +27,7 @@ In the `./src/pages/photos/PhotoDetails.js` path you will find a component based
 │   ├── albums
 │   └── photos
 └── styles
-
+```
 
 ## Steps to install and run this project locally.
 1. Clone repository: `git clone `
