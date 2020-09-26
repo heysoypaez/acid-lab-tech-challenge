@@ -1,3 +1,4 @@
+const API_URL = "https://graphqlzero.almansi.me/api";
 const DELETE_PHOTO = `
 	mutation (
 	  $id: ID!
@@ -62,4 +63,11 @@ const UPDATE_PHOTO = `
 		}
 		`;
 
-export { DELETE_PHOTO, CREATE_PHOTO, GET_PHOTOS, UPDATE_PHOTO, GET_PHOTO };
+export {
+  API_URL,
+  DELETE_PHOTO,
+  CREATE_PHOTO,
+  GET_PHOTOS,
+  UPDATE_PHOTO,
+  GET_PHOTO,
+};

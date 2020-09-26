@@ -4,7 +4,6 @@ import NewPhotoContainer from "../../components/photos/NewPhotoContainer.js";
 import Seo from "../../layout/Seo.js";
 
 const PhotoNew = ({ page }) => {
-  
   const { title, metaDescription } = page;
 
   return (
