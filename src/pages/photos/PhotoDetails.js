@@ -8,9 +8,12 @@ import {
   DELETE_PHOTO,
   UPDATE_PHOTO,
   GET_PHOTO,
+  API_URL,
 } from "../../helpers/graphqlQueries.js";
+import "./styles/PhotoDetails.scss";
 
 const PhotoDetails = (props) => {
+  const [firstLoading, setFirstLoading] = useState(true);
   const [photoId, setPhotoId] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,19 +24,19 @@ const PhotoDetails = (props) => {
   const [photoEdited, setPhotoEdited] = useState(false);
 
   const deletePhoto = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const { deletePhoto } = await graphql({
-        url: "https://graphqlzero.almansi.me/api",
+        url: API_URL,
         query: DELETE_PHOTO,
         id: photoId,
       });
       setPhotoDeleted(deletePhoto);
-      setLoading(false);
     } catch (error) {
       console.log(error);
       setError(error);
     }
+    setLoading(false);
   };
 
   const handleDeleteClick = () => {
@@ -45,13 +48,12 @@ const PhotoDetails = (props) => {
       ...editFormValues,
       [event.target.name]: event.target.value,
     });
-    console.log(editFormValues);
   };
 
   const editPhoto = async (photoId) => {
     try {
       const { updatePhoto } = await graphql({
-        url: "https://graphqlzero.almansi.me/api",
+        url: API_URL,
         query: UPDATE_PHOTO,
         id: photoId,
         input: {
@@ -60,12 +62,13 @@ const PhotoDetails = (props) => {
         },
       });
 
-      console.log(updatePhoto);
-      setLoading(true);
+      setPhoto(updatePhoto);
       setPhotoEdited(updatePhoto);
     } catch (error) {
-      console.log(error.message);
+      setError(error);
+      console.log(error);
     }
+    setLoading(true);
   };
 
   const handleEditClick = () => {
@@ -83,20 +86,26 @@ const PhotoDetails = (props) => {
   };
 
   const fetchPhoto = async (photoId) => {
+    setLoading(true);
     try {
       setPhotoId(props.match.params.photoId);
-      const { photo } = await graphql({
-        url: "https://graphqlzero.almansi.me/api",
-        query: GET_PHOTO,
-        id: photoId,
-      });
 
-      setPhoto(photo);
-      setLoading(false);
+      if (firstLoading) {
+        const { photo } = await graphql({
+          url: API_URL,
+          query: GET_PHOTO,
+          id: photoId,
+        });
+
+        setPhoto(photo);
+      }
+
+      setFirstLoading(false);
     } catch (error) {
       setError(error);
       console.log(error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -107,59 +116,37 @@ const PhotoDetails = (props) => {
 
   if (loading) {
     return <Loader />;
-  }
-
-  if (photoEdited) {
+  } else if (error) {
+    return <h2>{error}</h2>;
+  } else if (photoDeleted) {
+    return <h2>Photo deleted</h2>;
+  } else {
     return (
-      <Fragment>
-        <Photo photo={photoEdited} />
-        <button className="cta" onClick={handleDeleteClick}>
-          Delete
-        </button>
-        <button className="cta cta-secondary" onClick={handleEditClick}>
-          Edit
-        </button>
-        {showEdit && (
-          <EditPhotoForm
-            onSubmit={handleEditSubmit}
-            onChange={handleEditChange}
-          />
-        )}
-      </Fragment>
+      <section className="PhotoDetails">
+        <Seo
+          site={{
+            title: photo.title,
+            metaDescription: photo.title,
+          }}
+        />
+        <Photo photo={photo} />
+        <section>
+          <button className="cta" onClick={handleDeleteClick}>
+            Delete
+          </button>
+          <button className="cta cta-secondary" onClick={handleEditClick}>
+            Edit
+          </button>
+          {showEdit && (
+            <EditPhotoForm
+              onSubmit={handleEditSubmit}
+              onChange={handleEditChange}
+            />
+          )}
+        </section>
+      </section>
     );
   }
-
-  if (error) {
-    return <h2>{error}</h2>;
-  }
-
-  if (photoDeleted) {
-    return <h2>Photo deleted</h2>;
-  }
-
-  return (
-    <Fragment>
-      <Seo
-        site={{
-          title: photo.title,
-          metaDescription: photo.title,
-        }}
-      />
-      <Photo photo={photo} />
-      <button className="cta" onClick={handleDeleteClick}>
-        Delete
-      </button>
-      <button className="cta cta-secondary" onClick={handleEditClick}>
-        Edit
-      </button>
-      {showEdit && (
-        <EditPhotoForm
-          onSubmit={handleEditSubmit}
-          onChange={handleEditChange}
-        />
-      )}
-    </Fragment>
-  );
 };
 
 export default PhotoDetails;
