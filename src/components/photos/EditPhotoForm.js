@@ -16,7 +16,7 @@ function EditPhotoForm(props) {
         placeholder="thumbnail url"
         onChange={props.onChange}
       />
-      <input type="submit" value="Edit Photo" />
+      <input type="submit" value="Edit Photo" className="cta" />
     </form>
   );
 }

@@ -1,0 +1,8 @@
+@import "../../../styles/variables.scss";
+
+.EditPhotoForm {
+	display: grid;
+	box-shadow: $boxShadowDefault;
+	border-radius: $borderRadiusDefault;
+	padding: 5% 4%;
+}
