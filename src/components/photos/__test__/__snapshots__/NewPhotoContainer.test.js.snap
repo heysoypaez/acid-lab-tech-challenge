@@ -5,11 +5,6 @@ exports[`Snapshot of component Matches snapshot in default state 1`] = `
   className="NewPhotoForm"
   onSubmit={[Function]}
 >
-  <label
-    htmlFor="title"
-  >
-    Title
-  </label>
   <input
     id="title"
     name="title"
@@ -17,11 +12,6 @@ exports[`Snapshot of component Matches snapshot in default state 1`] = `
     placeholder="Title"
     type="text"
   />
-  <label
-    htmlFor="url"
-  >
-    Image Url
-  </label>
   <input
     id="url"
     name="url"
@@ -36,6 +26,7 @@ exports[`Snapshot of component Matches snapshot in default state 1`] = `
     type="url"
   />
   <input
+    className="cta"
     type="submit"
     value="Create New Photo"
   />

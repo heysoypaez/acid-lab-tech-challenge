@@ -4,7 +4,6 @@ import "./styles/NewPhotoForm.scss";
 function NewPhotoForm(props) {
   return (
     <form className="NewPhotoForm" onSubmit={props.onSubmit}>
-      <label htmlFor="title">Title</label>
       <input
         type="text"
         name="title"
@@ -12,7 +11,6 @@ function NewPhotoForm(props) {
         placeholder="Title"
         onChange={props.onChange}
       />
-      <label htmlFor="url">Image Url</label>
       <input
         type="url"
         id="url"
@@ -26,7 +24,7 @@ function NewPhotoForm(props) {
         placeholder="thumbnail url"
         onChange={props.onChange}
       />
-      <input type="submit" value="Create New Photo" />
+      <input type="submit" value="Create New Photo" className="cta" />
     </form>
   );
 }
