@@ -13,7 +13,6 @@ import "./App.scss";
 
 function App(props) {
   return (
-
     <HashRouter basename="/">
       <Layout>
         <Switch>
