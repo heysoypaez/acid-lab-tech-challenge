@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/acid-lab-tech-challenge/static/css/main.71211c97.chunk.css",
-    "main.js": "/acid-lab-tech-challenge/static/js/main.0c4ea529.chunk.js",
-    "main.js.map": "/acid-lab-tech-challenge/static/js/main.0c4ea529.chunk.js.map",
+    "main.css": "/acid-lab-tech-challenge/static/css/main.1b539a00.chunk.css",
+    "main.js": "/acid-lab-tech-challenge/static/js/main.222b5099.chunk.js",
+    "main.js.map": "/acid-lab-tech-challenge/static/js/main.222b5099.chunk.js.map",
     "runtime-main.js": "/acid-lab-tech-challenge/static/js/runtime-main.4ffbb588.js",
     "runtime-main.js.map": "/acid-lab-tech-challenge/static/js/runtime-main.4ffbb588.js.map",
-    "static/js/2.3a0c704d.chunk.js": "/acid-lab-tech-challenge/static/js/2.3a0c704d.chunk.js",
-    "static/js/2.3a0c704d.chunk.js.map": "/acid-lab-tech-challenge/static/js/2.3a0c704d.chunk.js.map",
+    "static/js/2.de9f5a3d.chunk.js": "/acid-lab-tech-challenge/static/js/2.de9f5a3d.chunk.js",
+    "static/js/2.de9f5a3d.chunk.js.map": "/acid-lab-tech-challenge/static/js/2.de9f5a3d.chunk.js.map",
     "index.html": "/acid-lab-tech-challenge/index.html",
-    "precache-manifest.29537014c69694f962fa751b477a07f2.js": "/acid-lab-tech-challenge/precache-manifest.29537014c69694f962fa751b477a07f2.js",
+    "precache-manifest.0a647cfd3ef3ac8ff88b593e3d7596e4.js": "/acid-lab-tech-challenge/precache-manifest.0a647cfd3ef3ac8ff88b593e3d7596e4.js",
     "service-worker.js": "/acid-lab-tech-challenge/service-worker.js",
-    "static/css/main.71211c97.chunk.css.map": "/acid-lab-tech-challenge/static/css/main.71211c97.chunk.css.map",
-    "static/js/2.3a0c704d.chunk.js.LICENSE.txt": "/acid-lab-tech-challenge/static/js/2.3a0c704d.chunk.js.LICENSE.txt"
+    "static/css/main.1b539a00.chunk.css.map": "/acid-lab-tech-challenge/static/css/main.1b539a00.chunk.css.map",
+    "static/js/2.de9f5a3d.chunk.js.LICENSE.txt": "/acid-lab-tech-challenge/static/js/2.de9f5a3d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4ffbb588.js",
-    "static/js/2.3a0c704d.chunk.js",
-    "static/css/main.71211c97.chunk.css",
-    "static/js/main.0c4ea529.chunk.js"
+    "static/js/2.de9f5a3d.chunk.js",
+    "static/css/main.1b539a00.chunk.css",
+    "static/js/main.222b5099.chunk.js"
   ]
 }

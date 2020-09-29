@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/acid-lab-tech-challenge/precache-manifest.29537014c69694f962fa751b477a07f2.js"
+  "/acid-lab-tech-challenge/precache-manifest.0a647cfd3ef3ac8ff88b593e3d7596e4.js"
 );
 
 self.addEventListener('message', (event) => {
