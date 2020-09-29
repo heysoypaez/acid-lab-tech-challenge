@@ -8,7 +8,7 @@ A CRUD Application which query its data from [https://graphqlzero.almansi.me/api
 
 ## Note: Particular components
 
-- In the `./src/pages/photos/PhotoDetails.js` path you will find a component based in React Hooks.
+- In the `src/components/photos/EditablePhoto.js` path you will find a component based in React Hooks.
 - In the `./src/components/photos/__test__/NewPhotoContainer.test.js` path you will find a unit test for the NewPhotoContainer.js component.
 
 ## Source File Structure
